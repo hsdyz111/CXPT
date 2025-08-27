@@ -1,0 +1,6 @@
+{
+  "item.xptool.xp_tool": "经验工具",
+  "item.xptool.xp_tool.desc": "可以从实体中提取经验的工具",
+  "enchantment.xptool.xp_siphon": "经验汲取",
+  "itemGroup.xptool": "XP Tool"
+}
