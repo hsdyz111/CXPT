@@ -1,0 +1,114 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:6.0.+'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+version = '1.0'
+group = 'com.hsdyz111.xptool'
+archivesBaseName = 'xptool'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'xptool'
+
+            mods {
+                xptool {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'xptool'
+            args '--nogui'
+
+            mods {
+                xptool {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'xptool', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                xptool {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.0'
+    // 完全移除对 Create 的直接依赖
+}
+
+processResources {
+    inputs.property 'version', version
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand (
+            'file': [jarVersion: version],
+            'version': version,
+            'minecraft_version': '1.20.1',
+            'minecraft_version_range': '[1.20.1,1.21)',
+            'forge_version': '47.4.0',
+            'forge_version_range': '[47.4.0,)',
+            'loader_version_range': '[47,)',
+            'mod_id': 'xptool',
+            'mod_name': 'Create:XP Tool',
+            'mod_license': 'MIT',
+            'mod_authors': 'hsdyz111&deepseek',
+            'mod_description': 'A Create addon that adds a tool to extract experience from entities',
+            'create_version': '0.5.1',
+            'create_version_range': '[0.5.1,)' // 支持所有 0.5.1 及更高版本
+        )
+    }
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "xptool",
+            "Specification-Vendor": "hsdyz111&deepseek",
+            "Specification-Version": "1",
+            "Implementation-Title": project.name,
+            "Implementation-Version": version,
+            "Implementation-Vendor": "hsdyz111&deepseek"
+        ])
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
