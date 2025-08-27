@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="xptool"
+version="${file.jarVersion}"
+displayName="Create:XP Tool"
+description="A Create addon that adds a tool to extract experience from entities"
+authors="hsdyz111&deepseek"
+
+[[dependencies.xptool]]
+modId="forge"
+versionRange="[47.4.0,)"
+mandatory=true
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.xptool]]
+modId="minecraft"
+versionRange="[1.20.1,1.21)"
+mandatory=true
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.xptool]]
+modId="create"
+versionRange="[0.5.1,)"  # 支持所有 0.5.1 及更高版本
+mandatory=true
+ordering="AFTER"
+side="BOTH"
