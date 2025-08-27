@@ -1,0 +1,6 @@
+{
+  "item.xptool.xp_tool": "XP Tool",
+  "item.xptool.xp_tool.desc": "A tool that extracts experience from entities",
+  "enchantment.xptool.xp_siphon": "XP Siphon",
+  "itemGroup.xptool": "XP Tool"
+}
