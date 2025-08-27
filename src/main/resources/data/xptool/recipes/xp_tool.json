@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    " P ",
+    " I "
+  ],
+  "key": {
+    "B": {
+      "item": "create:brass_ingot"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "I": {
+      "item": "create:iron_sheet"
+    }
+  },
+  "result": {
+    "item": "xptool:xp_tool",
+    "count": 1
+  }
+}
